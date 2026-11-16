@@ -1,0 +1,6 @@
+{
+  "name": "theme-claude",
+  "description": "Animated pixel-art themes for the Claude desktop and mobile apps.",
+  "owner": { "name": "Thanh-Mathieu95" },
+  "plugins": [{ "name": "pixel-scenes", "source": "./" }]
+}
