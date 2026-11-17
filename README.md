@@ -1,264 +1,308 @@
-# Pixel Scenes — animated pixel-art themes for Claude
+<h1 align="center">Pixel Scenes</h1>
 
-Sixteen hand-drawn, animated pixel-art backdrops for the Claude desktop and mobile apps. Each scene comes with its own matching color palette and a frosted veil tuned so text stays readable. Switch between them with one command: `/scene`.
+<p align="center">
+  <b>16 hand-drawn, animated pixel-art themes for Claude</b><br>
+  for the Claude desktop &amp; mobile apps <i>and</i> Windows Terminal
+</p>
 
-It also ships a **skill** that puts the same scenes behind **Windows Terminal**, so Claude Code in the terminal gets the look too.
+<p align="center">
+  <img alt="version" src="https://img.shields.io/badge/version-1.7.0-7a5cff">
+  <img alt="scenes" src="https://img.shields.io/badge/scenes-16-ff4fd8">
+  <img alt="Windows Terminal" src="https://img.shields.io/badge/Windows%20Terminal-supported-3df5ff">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-4fe3a0">
+</p>
 
-Everything in this repository is original. The scenes are drawn in code, pixel by pixel — no photos or artwork from anyone else.
+<p align="center">
+  <a href="#-quick-start">Quick start</a> ·
+  <a href="#-use-it-in-the-desktop-app">Desktop app</a> ·
+  <a href="#-use-it-in-windows-terminal">Windows Terminal</a> ·
+  <a href="#-the-16-scenes">Scenes</a> ·
+  <a href="#-install-from-a-clone">Install from a clone</a> ·
+  <a href="#-troubleshooting">Troubleshooting</a>
+</p>
 
-![Landscape scenes](docs/landscapes.png)
+<p align="center"><img src="docs/landscapes.png" alt="The six landscape scenes" width="100%"></p>
 
-![City scenes](docs/cities.png)
+Every scene is drawn in code, pixel by pixel, and comes with its own color palette: background, text colors, accent and a glass panel tuned so the conversation stays readable. Nothing here is a photo or someone else's artwork.
 
-![Side-framed scenes](docs/framed.png)
+---
 
-The screenshots are still frames. In the app the scenes move.
+## ✨ What you get
 
-## Contents
+| | |
+| --- | --- |
+| 🎨 **16 scenes** | 6 landscapes, 6 cities and 4 side-framed scenes whose artwork stays at the edges |
+| 🌧️ **Real animation** | drifting clouds, rain, snow, falling petals and leaves, neon signs, aurora, twinkling windows — CSS inside SVG, no scripts |
+| 🖋️ **Text colors per scene** | in dark mode each scene has its own text: neon pink for `neon`, lantern amber for `tre-dem`, aurora green for `cuc-quang` |
+| 🪟 **Adjustable glass** | `/scene glass 0` makes the panel behind the chat fully transparent; the scene then dims softly behind the text only |
+| 💻 **Windows Terminal** | the same scenes and text colors as a terminal background, switched with the same `/scene` command |
+| 💾 **Remembers your choice** | the scene and glass setting carry over to every new session |
+| 🪶 **Small** | one hooks module and one script, no dependencies, no network access |
 
-- [Features](#features)
-- [Requirements](#requirements)
-- [Install](#install)
-- [Usage](#usage)
-- [The 16 scenes](#the-16-scenes)
-- [Windows Terminal (skill)](#windows-terminal-skill)
-- [Readability and accessibility](#readability-and-accessibility)
-- [Limitations](#limitations)
-- [Customizing](#customizing)
-- [Development](#development)
-- [Uninstall](#uninstall)
-- [License](#license)
+---
 
-## Features
+## 🚀 Quick start
 
-- **16 scenes in three groups**: 6 landscapes, 6 cities, and 4 "side-framed" scenes whose artwork sits at the left and right edges so the conversation never covers it.
-- **Real animation**: drifting clouds, sparkling water, falling snow, rain, petals and leaves, pulsing neon signs and aurora, twinkling stars and windows. All of it is CSS inside the SVG — no scripts.
-- **A color palette per scene**: the app's surfaces and accent color are tinted to match the scene, and in dark mode each scene has its own text colors (neon pink for `neon`, lantern amber for `tre-dem`, aurora green for `cuc-quang`, …). Ten scenes support both light and dark mode; six night scenes are dark-only.
-- **Adjustable glass**: `/scene glass 0` makes the panel behind the conversation fully transparent; the scene then darkens softly behind the chat column only, so text stays readable while the edges stay vivid.
-- **A veil tuned per scene**: the frosted panel behind the conversation has its own strength for every scene, measured from how bright that scene is. Night scenes also tint the veil with their own color.
-- **Your choice persists**: the scene is saved and restored in every new session.
-- **A Windows Terminal skill**: ask Claude to theme your terminal and it sets a Windows Terminal profile to any of the 16 scenes, with a matching color scheme. See [Windows Terminal (skill)](#windows-terminal-skill).
-- **Small and self-contained**: one hooks module, no dependencies, no network access. The largest scene is about 87 KB of SVG.
+**1. Install** — in a terminal with [Claude Code](https://claude.com/claude-code):
 
-## Requirements
-
-- **Claude desktop app or Claude mobile app** to see the themes. A recent version with plugin (mod) support is required.
-- **Claude Code** to install the plugin (the install command runs at a Claude Code prompt).
-
-The terminal and editor extensions do not draw plugin themes. The plugin loads there without errors, but nothing changes visually. For the terminal, use the [Windows Terminal skill](#windows-terminal-skill) instead.
-
-## Install
-
-At the prompt of a Claude Code terminal session:
-
-```
-/plugin install pixel-scenes --marketplace Thanh-Mathieu95/Theme-Claude
-```
-
-Or from a shell:
-
-```
+```bash
 claude plugin install pixel-scenes --marketplace Thanh-Mathieu95/Theme-Claude
 ```
 
-You will be asked two things:
+Answer `y` to **Add marketplace?**, then press Enter to keep the **user** scope (every session gets the theme).
 
-1. `Add marketplace?` — answer `y`. This adds this repository as a plugin source.
-2. A scope — press Enter to accept the **user** scope, which makes the theme available in every session.
+> In the Claude desktop app instead: click **+** next to the prompt box → **Plugins** → **Add marketplace** → `Thanh-Mathieu95/Theme-Claude` → **Add plugin**.
 
-In the desktop app, where `/plugin` does not run: click **+** next to the prompt box, choose **Plugins**, **Add marketplace**, enter `Thanh-Mathieu95/Theme-Claude`, then **Add plugin**.
+**2. Open a new session** in the Claude desktop app (the **Code** tab). The default scene, `pho-bien`, appears right away.
 
-After installing, start a new session in the desktop app. The default scene (`pho-bien`, the coastal city) appears right away.
+**3. Pick a scene:**
 
-## Usage
+```text
+/scene          list all 16 scenes
+/scene 9        switch by number
+/scene neon     switch by name
+```
 
-Type these in the message box of a session:
+That's it for the desktop app. For the terminal, see [Use it in Windows Terminal](#-use-it-in-windows-terminal).
+
+---
+
+## 🖥️ Use it in the desktop app
+
+<p align="center"><img src="docs/cities.png" alt="The six city scenes" width="100%"></p>
 
 | Command | What it does |
 | --- | --- |
-| `/scene` | Lists all 16 scenes |
-| `/scene 9` | Switches to scene number 9 |
-| `/scene neon` | Switches to a scene by its name |
-| `/scene next` | Switches to the next scene in the list |
-| `/scene glass 0` | Makes the glass behind the conversation transparent (any value from 0 to 1) |
-| `/scene glass auto` | Returns the glass to each scene's own strength |
+| `/scene` | Lists the 16 scenes |
+| `/scene <number or name>` | Switches scene, colors and text colors together |
+| `/scene next` | Goes to the next scene in the list |
+| `/scene glass 0` | Makes the glass behind the conversation transparent |
+| `/scene glass 0.4` | Any strength from `0` (transparent) to `1` (solid) |
+| `/scene glass auto` | Back to each scene's own strength |
 
-In a terminal, `/scene` also switches the Windows Terminal background once the [terminal profile](#windows-terminal-skill) is set up.
+The command's replies are written in Vietnamese; the scene names are the ones in [the list below](#-the-16-scenes).
 
-The command's replies are written in Vietnamese; the scene names below are the ones you type.
+**Light and dark mode.** Eight scenes have palettes for both modes. The other eight (`hoang-hon-bien`, `cuc-quang`, `pho-dem`, `neon`, `pho-hoang-hon`, `pho-tuyet`, `tre-dem`, `hem-pho`) are night scenes made for dark mode and ask the app to draw dark. The per-scene text colors apply in dark mode; light mode keeps dark text, which is what stays readable on light surfaces.
 
-## The 16 scenes
+**Transparent glass.** At `/scene glass 0` there is no frosted panel at all. To keep text readable, the scene itself dims a little behind the chat column, fading out toward the edges — the brighter the scene, the more it dims, but never more than the scene's default glass would.
 
-"Modes" says which app color modes the scene has a palette for. A dark-only scene asks the app to draw in dark mode.
+---
 
-### Landscapes
+## 💻 Use it in Windows Terminal
 
-| # | Name | Scene | Motion | Modes |
-| --- | --- | --- | --- | --- |
-| 1 | `ho-nui` | Snowy peaks over a mountain lake, pine forest | drifting clouds, sparkling water | light + dark |
-| 2 | `hoang-hon-bien` | Sunset over the sea, palm silhouettes | sparkling sun path | dark |
-| 3 | `rung-suong` | Misty pine forest at dawn | breathing fog, drifting birds | light + dark |
-| 4 | `sa-mac` | Desert dunes and mesas at dusk | twinkling stars, drifting clouds | light + dark |
-| 5 | `cuc-quang` | Aurora over snowy hills and a cabin | pulsing aurora, twinkling stars | dark |
-| 6 | `hoa-anh-dao` | Cherry blossoms by a lake under a snowy peak | falling petals, sparkling water | light + dark |
+<table>
+  <tr>
+    <td><img src="docs/terminal/neon.png" alt="Windows Terminal with the neon scene"></td>
+    <td><img src="docs/terminal/tre-dem.png" alt="Windows Terminal with the bamboo grove scene"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/terminal/cau-cang.png" alt="Windows Terminal with the harbor scene"></td>
+    <td><img src="docs/terminal/la-thu.png" alt="Windows Terminal with the autumn maples scene"></td>
+  </tr>
+</table>
 
-### Cities
+<sub>Previews rendered from the real background images, image opacity and color schemes the plugin writes to Windows Terminal; not screen captures.</sub>
 
-| # | Name | Scene | Motion | Modes |
-| --- | --- | --- | --- | --- |
-| 7 | `pho-bien` | Coastal city seen from a green hill (default) | drifting clouds, sparkling water | light + dark |
-| 8 | `pho-dem` | Night skyline under a full moon, reflected in water | twinkling windows and stars | dark |
-| 9 | `neon` | Neon city in the rain | falling rain, pulsing neon signs | dark |
-| 10 | `pho-hoang-hon` | Skyline silhouette against a huge setting sun | sparkling river | dark |
-| 11 | `pho-tuyet` | Snowy city at dusk, street lamps, pines | falling snow | dark |
-| 12 | `cau-cang` | Suspension bridge and harbor at sunrise | drifting clouds, sparkling water | light + dark |
+A terminal cannot draw a Claude theme, so the plugin brings the look another way: a Windows Terminal profile named **Claude - Pixel Scenes** with the scene as its background image and a color scheme built from the scene's palette. Its text colors are the same as in the desktop app.
 
-### Side-framed scenes
+### Set it up (once)
 
-The artwork is concentrated at the left and right edges; the middle is a calm sky, so the conversation covers nothing.
+**1. Install the plugin** (see [Quick start](#-quick-start)).
 
-| # | Name | Scene | Motion | Modes |
-| --- | --- | --- | --- | --- |
-| 13 | `tre-dem` | Bamboo grove at night with two red lanterns | glowing lanterns, fireflies | dark |
-| 14 | `hem-pho` | Two rows of lit towers framing a dusk sky | pulsing neon signs, blinking string lights | dark |
-| 15 | `thac-doi` | Twin waterfalls on rock cliffs, lake and far peaks | shimmering falls, mist, clouds | light + dark |
-| 16 | `la-thu` | Two autumn maples framing a golden field | falling leaves | light + dark |
-
-## Windows Terminal (skill)
-
-A terminal cannot draw a plugin's theme, so the plugin includes a skill, **terminal-theme**, that gives Windows Terminal the same look another way: it sets one Windows Terminal profile, **Claude - Pixel Scenes**, to use a scene as its background image with a color scheme made from the scene's palette.
-
-![Windows Terminal before and after](docs/terminal-preview.png)
-
-*Left: Windows Terminal's default. Right: the `neon` scene and its color scheme. A mock-up drawn with the same colors and image strength.*
-
-### Use it
-
-Once the plugin is installed, just ask Claude, in any session:
+**2. Ask Claude to set up the terminal.** Run `claude` in any terminal and say:
 
 > Put the neon scene behind my Windows Terminal.
 
-> Change my terminal to the waterfall scene.
+Claude lists the scenes if you don't name one, tells you what it will change, and asks before doing it.
 
-> Remove the pixel scene from my terminal.
+**3. Open the profile.** Press <kbd>Win</kbd> + <kbd>R</kbd>, paste this and press Enter:
 
-Claude lists the scenes if you don't name one, tells you what will change, and runs the script. Then, in Windows Terminal, click the **▾** next to **+** on the tab bar and choose **Claude - Pixel Scenes**. The tab starts `claude`. To make it the default: **Settings › Startup › Default profile › Claude - Pixel Scenes › Save**.
+```text
+wt -p "Claude - Pixel Scenes"
+```
 
-### What it changes
+Or, in Windows Terminal, click the small **∨** next to **+** on the tab bar and choose **Claude - Pixel Scenes**. The tab starts `claude` on its own.
+
+**4. (Optional) Make it the default.** Windows Terminal → **Settings** → **Startup** → **Default profile** → **Claude - Pixel Scenes** → **Save**.
+
+### Every day
+
+Inside that tab, `/scene 13`, `/scene neon` or `/scene next` switch **both** the background image and the text colors; the open tab changes at once. If you type `/scene` in a tab that uses another profile, it tells you and shows how to open the right one.
+
+### What it changes on your PC
 
 - Writes the scene as a 1920×1080 PNG to `%LOCALAPPDATA%\PixelScenes\`.
-- The color scheme uses the scene's own text colors, the same as in the desktop app: main text, secondary text (ANSI white) and dim text (ANSI bright black).
-- Adds or updates **one** profile (**Claude - Pixel Scenes**, fixed GUID, never duplicated) and **one** color scheme (`Pixel Scenes - <scene>`) in Windows Terminal's `settings.json`. Nothing else is touched.
+- Adds or updates **one** profile (**Claude - Pixel Scenes**) and **one** color scheme (`Pixel Scenes - <scene>`) in Windows Terminal's `settings.json`. No other profile or setting is touched.
 - Backs up `settings.json` to `settings.json.bak-pixel-scenes` before its first change.
-- Windows Terminal reloads its settings by itself, so an open tab on that profile changes at once.
 
-The terminal image is still: animation is a desktop-app feature.
+The terminal background is a still image; animation is a desktop-app feature, and `/scene glass` has no effect in a terminal.
 
-**Switching scenes in the terminal.** Once the profile exists, typing `/scene <name or number>` inside a Claude Code session in the terminal switches the Windows Terminal background as well, and the open tab changes at once. Before the profile exists, `/scene` in the terminal changes nothing there and tells you to ask Claude to set it up first. If you type `/scene` in a tab that uses another profile, it says so and tells you how to open the **Claude - Pixel Scenes** tab.
+### Without Claude
 
-### Run the script yourself
-
-The skill is a thin wrapper around `skills/terminal-theme/terminal-theme.mjs`. You can run it directly with Node.js:
+The skill is a small script you can run yourself with Node.js:
 
 | Command | What it does |
 | --- | --- |
-| `node terminal-theme.mjs --list` | Lists the 16 scenes |
-| `node terminal-theme.mjs neon` | Applies a scene (by name or number) |
-| `node terminal-theme.mjs 9 --opacity 0.2` | Same, with a fainter image (default 0.3) |
-| `node terminal-theme.mjs --remove` | Removes the profile and its color schemes |
-| `node terminal-theme.mjs --export neon neon.png` | Only writes the background image (any OS) |
+| `node terminal-theme.mjs --list` | Lists the scenes |
+| `node terminal-theme.mjs neon` | Applies a scene (name or number) |
+| `node terminal-theme.mjs 9 --opacity 0.2` | Fainter image (default `0.3`) |
+| `node terminal-theme.mjs --remove` | Removes the profile and its schemes |
+| `node terminal-theme.mjs --export neon neon.png` | Only writes the image (any OS) |
 
-### Other terminals and platforms
+The script is `skills/terminal-theme/terminal-theme.mjs` in this repository.
 
-Windows Terminal is Windows only. On macOS or Linux, use `--export` to get the image and set it as your terminal's background by hand (for example iTerm2: **Settings › Profiles › Window › Background Image**).
+**macOS and Linux** have no Windows Terminal. Use `--export` to get the image and set it as your terminal's background by hand (iTerm2: **Settings → Profiles → Window → Background Image**).
 
-### Undo
+---
 
-- Remove only what the skill added: ask Claude, or run `--remove`.
-- Restore the settings exactly as they were before the first change: copy `settings.json.bak-pixel-scenes` over `settings.json` in the same folder. This also undoes any other change made since.
+## 🎨 The 16 scenes
 
-The script refuses to rewrite a `settings.json` that has comments or trailing commas, rather than lose them.
+<p align="center"><img src="docs/framed.png" alt="The four side-framed scenes" width="100%"></p>
 
-## Readability and accessibility
+| # | Name | Scene | Motion | Modes |
+| --- | --- | --- | --- | --- |
+| | **Landscapes** | | | |
+| 1 | `ho-nui` | Snowy peaks over a mountain lake | clouds, sparkling water | light · dark |
+| 2 | `hoang-hon-bien` | Sunset over the sea, palms | sparkling sun path | dark |
+| 3 | `rung-suong` | Misty pine forest at dawn | breathing fog, birds | light · dark |
+| 4 | `sa-mac` | Desert dunes and mesas at dusk | stars, clouds | light · dark |
+| 5 | `cuc-quang` | Aurora over snowy hills, a cabin | pulsing aurora, stars | dark |
+| 6 | `hoa-anh-dao` | Cherry blossoms by a lake | falling petals | light · dark |
+| | **Cities** | | | |
+| 7 | `pho-bien` | Coastal city from a green hill *(default)* | clouds, sparkling water | light · dark |
+| 8 | `pho-dem` | Night skyline under a full moon | twinkling windows | dark |
+| 9 | `neon` | Neon city in the rain | rain, neon signs | dark |
+| 10 | `pho-hoang-hon` | Skyline against a setting sun | sparkling river | dark |
+| 11 | `pho-tuyet` | Snowy city at dusk | falling snow | dark |
+| 12 | `cau-cang` | Suspension bridge and harbor at sunrise | clouds, sparkling water | light · dark |
+| | **Side-framed** — artwork at the edges, calm middle | | | |
+| 13 | `tre-dem` | Bamboo grove with red lanterns | glowing lanterns, fireflies | dark |
+| 14 | `hem-pho` | Lit towers framing a dusk sky | neon signs, string lights | dark |
+| 15 | `thac-doi` | Twin waterfalls, lake, far peaks | shimmering falls, mist | light · dark |
+| 16 | `la-thu` | Autumn maples framing a golden field | falling leaves | light · dark |
 
-- **Transparent glass stays readable.** When the glass is thinner than a scene needs, the scene adds a soft scrim behind the chat column (fading out toward the edges), darker for brighter scenes; scenes that support light mode use a light scrim there.
-- **Veil strength is measured, not guessed.** For each scene, the opacity of the frosted panel behind the conversation was chosen from the contrast between the theme's text colors and the brightest (or darkest) parts of the scene behind it.
-- **Reduced motion is respected.** If your operating system is set to reduce motion, every scene is drawn still.
-- **Animation is deliberately slow and small.** Clouds take 90 seconds to drift a few pixels; only the rain in `neon` is fast.
-- **Each scene has alt text** describing it.
-- **Palettes are checked.** Every palette is generated with the app's own color helper and verified to be one the desktop app will paint.
+---
 
-## Limitations
+## 📦 Install from a clone
 
-- **Fonts cannot be changed.** A Claude theme controls colors and the backdrop only.
-- **The terminal and editor extensions draw no plugin theme.** In Windows Terminal, use the [skill](#windows-terminal-skill); its background is a still image.
-- **Bright daytime scenes in dark mode.** `ho-nui`, `hoa-anh-dao`, `pho-bien`, `cau-cang`, `thac-doi` and `la-thu` have bright skies. Their veil is kept lighter than strict contrast would ask for, so the middle of the window is not a dark slab; white text over the brightest patches is weaker there. They read best in light mode.
-- **Narrow windows crop the sides.** Scenes are scaled to fill the window, so a tall, narrow window cuts off the left and right edges — which is where the side-framed scenes keep their artwork.
-- **Permission prompts keep the app's own look.**
-- **Command replies are in Vietnamese.**
+Prefer to keep a copy of the repository? Clone it and install from the folder:
 
-## Customizing
-
-All scenes live in one file, [`hooks/scenes.js`](hooks/scenes.js). Each is a short function built from shared helpers (`bands`, `ridge`, `peaks`, `skyline`, `pines`, `clouds`, `twinkle`, `falling`, …) on a 320×180 pixel grid.
-
-To add a scene:
-
-1. Write a new `scene(seed, () => { … })` function in `hooks/scenes.js`. Keep the SVG under 131,072 characters.
-2. Add an entry to the `THEMES` array at the bottom of that file:
-
-   ```js
-   { id: 'my-scene', veil: 0.5, title: 'My scene', hue: 210, sat: 30, accent: '#2f7fd6', draw: myScene },
-   ```
-
-   | Field | Meaning |
-   | --- | --- |
-   | `id` | The name typed after `/scene` (letters, digits, `-`) |
-   | `title` | Shown in the list and used as alt text |
-   | `veil` | Opacity of the panel behind the conversation, 0 to 1. Brighter scenes need more |
-   | `tint` | Optional raw color for the veil. Only for single-mode scenes, since it does not follow light/dark |
-   | `hue`, `sat` | Hue and saturation of the app's tinted grays |
-   | `accent` | The accent color (links, buttons, code keywords) |
-   | `only` | `'dark'` for a scene made for dark mode only |
-   | `text` | Optional `[main, secondary, dim]` text colors for dark mode; also used by the terminal scheme |
-
-To change the veil blur for every scene, edit `glass: { blur: 12, … }` in [`hooks/register.tsx`](hooks/register.tsx). To change the default scene, edit `DEFAULT` in the same file.
-
-## Development
-
-```
+```bash
 git clone https://github.com/Thanh-Mathieu95/Theme-Claude
+```
+
+```bash
+claude plugin marketplace add ./Theme-Claude
+```
+
+```bash
+claude plugin install pixel-scenes@theme-claude
+```
+
+`theme-claude` is the marketplace name declared in this repository, so the plugin's full name is `pixel-scenes@theme-claude`. Choose the **user** scope when asked.
+
+Then set up the terminal as in [Use it in Windows Terminal](#-use-it-in-windows-terminal), or straight from the clone:
+
+```bash
+node Theme-Claude/skills/terminal-theme/terminal-theme.mjs neon
+```
+
+**Try it without installing** (only for that one session):
+
+```bash
 claude --plugin-dir Theme-Claude
 ```
 
-`--plugin-dir` loads the plugin straight from the folder and hot-reloads it as you edit.
+**Get a new version:**
 
-| Task | Command |
-| --- | --- |
-| Validate the manifest and hooks module | `claude plugin validate .` |
-| Type-check (after the engine has loaded the plugin once, which writes its types) | `npx -p typescript tsc -p .` |
-
-Repository layout:
-
+```bash
+git -C Theme-Claude pull
 ```
+
+```bash
+claude plugin marketplace update theme-claude
+```
+
+```bash
+claude plugin update pixel-scenes@theme-claude
+```
+
+Restart Claude (or open a new session) to load it.
+
+---
+
+## 🛟 Troubleshooting
+
+| You see | Do this |
+| --- | --- |
+| `/scene` is "unknown command" | The plugin loads in sessions started **after** installing. Open a new session. In the Claude app, use the **Code** tab — plugins don't run in the regular chat. |
+| The desktop theme doesn't change | Open a new session after installing or updating. |
+| The terminal background stays black | You're in a tab of another profile. Open **Claude - Pixel Scenes** (<kbd>Win</kbd>+<kbd>R</kbd> → `wt -p "Claude - Pixel Scenes"`). |
+| `/scene` says the terminal has no profile yet | Ask Claude "put this scene behind my Windows Terminal" once. |
+| The profile opens but `claude` is not found | Claude Code isn't on the PATH for `cmd.exe`. Edit the profile's command line in Windows Terminal settings. |
+| Text is hard to read | Desktop: `/scene glass 0.5` or `/scene glass auto`. Terminal: re-apply with `--opacity 0.2`. |
+| The script refuses `settings.json` | It has comments or trailing commas; the script won't rewrite them. Remove them via Windows Terminal → Settings → Open JSON file. |
+
+**Things a theme cannot change:** fonts, the shape or borders of individual messages, and permission prompts (they always keep the app's own look).
+
+---
+
+## 🗑️ Uninstall
+
+1. If you used the terminal profile, remove it first — ask Claude "remove the pixel scene from my terminal", or run `node terminal-theme.mjs --remove`.
+2. Remove the plugin:
+
+```bash
+claude plugin uninstall pixel-scenes
+```
+
+To restore Windows Terminal's settings exactly as before the first change, copy `settings.json.bak-pixel-scenes` over `settings.json` in the same folder (this also undoes anything changed since).
+
+---
+
+## 🛠️ Make your own scene
+
+All scenes live in [`hooks/scenes.js`](hooks/scenes.js), each a short function on a 320×180 pixel grid built from shared helpers (`bands`, `ridge`, `peaks`, `skyline`, `pines`, `clouds`, `twinkle`, `falling`, …). To add one, write a `scene(seed, () => { … })` function and add an entry to `THEMES`:
+
+```js
+{ id: 'my-scene', veil: 0.35, title: 'My scene', hue: 210, sat: 30, accent: '#2f7fd6',
+  text: ['#eaf4ff', '#b8d6f2', '#8fb4d8'], draw: myScene },
+```
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Name typed after `/scene` (letters, digits, `-`) |
+| `title` | Shown in the list and used as alt text |
+| `veil` | Default glass strength, `0`–`1`; brighter scenes need more |
+| `tint` | Optional raw color for the glass (single-mode scenes only) |
+| `hue`, `sat` | Tint of the app's grays |
+| `accent` | Links, buttons, code keywords, terminal cursor |
+| `text` | Optional dark-mode `[main, secondary, dim]` text colors, also used by the terminal |
+| `only` | `'dark'` for a scene made for dark mode only |
+
+Keep each scene's SVG under 131,072 characters.
+
+### Develop
+
+```bash
+claude --plugin-dir Theme-Claude
+```
+
+`--plugin-dir` loads the plugin from the folder and reloads it as you edit. Check it with `claude plugin validate .`.
+
+```text
 .claude-plugin/plugin.json        plugin manifest
 .claude-plugin/marketplace.json   makes this repository installable
-hooks/hooks.json                  names the hooks module
-hooks/register.tsx                /scene command, theme, backdrop hook
-hooks/scenes.js                   the 16 scenes, palettes and scene list
+hooks/register.tsx                /scene command, theme, glass, terminal switching
+hooks/scenes.js                   the 16 scenes, palettes and text colors
 hooks/make-colors.js              the app's color helper (copied, unmodified)
 skills/terminal-theme/SKILL.md    the Windows Terminal skill
 skills/terminal-theme/terminal-theme.mjs   its script
-docs/*.png                        preview images for this README
+docs/                             images for this README
 ```
 
-## Uninstall
+---
 
-```
-/plugin uninstall pixel-scenes
-```
+## 📄 License
 
-The app's own look returns in the next session. If you used the Windows Terminal skill, remove its profile first (ask Claude, or run `terminal-theme.mjs --remove`).
-
-## License
-
-[MIT](LICENSE) © Nguyen Duong Cong Thanh. The pixel art is original work and are covered by the same license.
+[MIT](LICENSE) © Nguyen Duong Cong Thanh. The pixel art is original work and covered by the same license.
