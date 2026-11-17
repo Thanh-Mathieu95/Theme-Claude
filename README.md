@@ -2,6 +2,8 @@
 
 Sixteen hand-drawn, animated pixel-art backdrops for the Claude desktop and mobile apps. Each scene comes with its own matching color palette, a frosted veil tuned so text stays readable, and an optional ambient sound loop. Switch between them with one command: `/scene`.
 
+It also ships a **skill** that puts the same scenes behind **Windows Terminal**, so Claude Code in the terminal gets the look too.
+
 Everything in this repository is original. The scenes are drawn in code, pixel by pixel, and the sounds are synthesized from noise and sine waves — no photos, artwork or audio samples from anyone else.
 
 ![Landscape scenes](docs/landscapes.png)
@@ -20,6 +22,7 @@ The screenshots are still frames. In the app the scenes move.
 - [Usage](#usage)
 - [The 16 scenes](#the-16-scenes)
 - [Ambient sound](#ambient-sound)
+- [Windows Terminal (skill)](#windows-terminal-skill)
 - [Readability and accessibility](#readability-and-accessibility)
 - [Limitations](#limitations)
 - [Customizing](#customizing)
@@ -35,6 +38,7 @@ The screenshots are still frames. In the app the scenes move.
 - **A veil tuned per scene**: the frosted panel behind the conversation has its own strength for every scene, measured from how bright that scene is. Night scenes also tint the veil with their own color.
 - **Ambient sound, optional**: rain, waves, waterfall, wind or night crickets, depending on the scene. One command turns it off, and the choice is remembered.
 - **Your choice persists**: the scene and the sound setting are saved and restored in every new session.
+- **A Windows Terminal skill**: ask Claude to theme your terminal and it sets a Windows Terminal profile to any of the 16 scenes, with a matching color scheme. See [Windows Terminal (skill)](#windows-terminal-skill).
 - **Small and self-contained**: one hooks module, no dependencies, no network access. The largest scene is about 87 KB of SVG.
 
 ## Requirements
@@ -43,7 +47,7 @@ The screenshots are still frames. In the app the scenes move.
 - **Claude Code** to install the plugin (the install command runs at a Claude Code prompt).
 - For sound: **Windows** (uses the built-in PowerShell sound player) or **macOS**. See [Ambient sound](#ambient-sound).
 
-The terminal and editor extensions do not draw themes. The plugin loads there without errors, but nothing changes visually.
+The terminal and editor extensions do not draw plugin themes. The plugin loads there without errors and plays sound, but nothing changes visually. For the terminal, use the [Windows Terminal skill](#windows-terminal-skill) instead.
 
 ## Install
 
@@ -139,6 +143,58 @@ Platform notes:
 
 If a loop cannot start, the plugin shows a toast naming the reason instead of failing silently.
 
+## Windows Terminal (skill)
+
+A terminal cannot draw a plugin's theme, so the plugin includes a skill, **terminal-theme**, that gives Windows Terminal the same look another way: it sets one Windows Terminal profile, **Claude - Pixel Scenes**, to use a scene as its background image with a color scheme made from the scene's palette.
+
+![Windows Terminal before and after](docs/terminal-preview.png)
+
+*Left: Windows Terminal's default. Right: the `neon` scene and its color scheme. A mock-up drawn with the same colors and image strength.*
+
+### Use it
+
+Once the plugin is installed, just ask Claude, in any session:
+
+> Put the neon scene behind my Windows Terminal.
+
+> Change my terminal to the waterfall scene.
+
+> Remove the pixel scene from my terminal.
+
+Claude lists the scenes if you don't name one, tells you what will change, and runs the script. Then, in Windows Terminal, click the **▾** next to **+** on the tab bar and choose **Claude - Pixel Scenes**. The tab starts `claude`. To make it the default: **Settings › Startup › Default profile › Claude - Pixel Scenes › Save**.
+
+### What it changes
+
+- Writes the scene as a 1920×1080 PNG to `%LOCALAPPDATA%\PixelScenes\`.
+- Adds or updates **one** profile (**Claude - Pixel Scenes**, fixed GUID, never duplicated) and **one** color scheme (`Pixel Scenes - <scene>`) in Windows Terminal's `settings.json`. Nothing else is touched.
+- Backs up `settings.json` to `settings.json.bak-pixel-scenes` before its first change.
+- Windows Terminal reloads its settings by itself, so an open tab on that profile changes at once.
+
+The terminal image is still: animation is a desktop-app feature. Sound still plays in the terminal and follows `/scene`, but `/scene` does not change the terminal's image — ask Claude for another scene instead.
+
+### Run the script yourself
+
+The skill is a thin wrapper around `skills/terminal-theme/terminal-theme.mjs`. You can run it directly with Node.js:
+
+| Command | What it does |
+| --- | --- |
+| `node terminal-theme.mjs --list` | Lists the 16 scenes |
+| `node terminal-theme.mjs neon` | Applies a scene (by name or number) |
+| `node terminal-theme.mjs 9 --opacity 0.2` | Same, with a fainter image (default 0.3) |
+| `node terminal-theme.mjs --remove` | Removes the profile and its color schemes |
+| `node terminal-theme.mjs --export neon neon.png` | Only writes the background image (any OS) |
+
+### Other terminals and platforms
+
+Windows Terminal is Windows only. On macOS or Linux, use `--export` to get the image and set it as your terminal's background by hand (for example iTerm2: **Settings › Profiles › Window › Background Image**).
+
+### Undo
+
+- Remove only what the skill added: ask Claude, or run `--remove`.
+- Restore the settings exactly as they were before the first change: copy `settings.json.bak-pixel-scenes` over `settings.json` in the same folder. This also undoes any other change made since.
+
+The script refuses to rewrite a `settings.json` that has comments or trailing commas, rather than lose them.
+
 ## Readability and accessibility
 
 - **Veil strength is measured, not guessed.** For each scene, the opacity of the frosted panel behind the conversation was chosen from the contrast between the theme's text colors and the brightest (or darkest) parts of the scene behind it.
@@ -150,7 +206,7 @@ If a loop cannot start, the plugin shows a toast naming the reason instead of fa
 ## Limitations
 
 - **Fonts cannot be changed.** A Claude theme controls colors and the backdrop only.
-- **The terminal and editor extensions draw no theme.** This is a desktop and mobile look.
+- **The terminal and editor extensions draw no plugin theme.** In Windows Terminal, use the [skill](#windows-terminal-skill); its background is a still image.
 - **Bright daytime scenes in dark mode.** `ho-nui`, `hoa-anh-dao`, `pho-bien`, `cau-cang`, `thac-doi` and `la-thu` have bright skies. Their veil is kept lighter than strict contrast would ask for, so the middle of the window is not a dark slab; white text over the brightest patches is weaker there. They read best in light mode.
 - **Narrow windows crop the sides.** Scenes are scaled to fill the window, so a tall, narrow window cuts off the left and right edges — which is where the side-framed scenes keep their artwork.
 - **Permission prompts keep the app's own look.**
@@ -206,6 +262,8 @@ hooks/hooks.json                  names the hooks module
 hooks/register.tsx                /scene command, theme, sound, backdrop hook
 hooks/scenes.js                   the 16 scenes, palettes and scene list
 hooks/make-colors.js              the app's color helper (copied, unmodified)
+skills/terminal-theme/SKILL.md    the Windows Terminal skill
+skills/terminal-theme/terminal-theme.mjs   its script
 sounds/*.wav                      five synthesized ambient loops
 tools/make-sounds.mjs             generator for the loops
 docs/*.png                        preview images for this README
@@ -217,7 +275,7 @@ docs/*.png                        preview images for this README
 /plugin uninstall pixel-scenes
 ```
 
-The app's own look returns in the next session.
+The app's own look returns in the next session. If you used the Windows Terminal skill, remove its profile first (ask Claude, or run `terminal-theme.mjs --remove`).
 
 ## License
 
