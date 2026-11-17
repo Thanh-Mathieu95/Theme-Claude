@@ -4,7 +4,6 @@ export type SceneTheme = {
   id: string
   title: string
   veil: number
-  sound: string
   tint?: string
   hue: number
   sat: number

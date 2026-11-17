@@ -651,27 +651,26 @@ const laThu = scene(104, () => {
   falling(10, ['#f6b83a'], 'animation-duration:28s', 2, 2)
 })
 
-// sound: vòng âm thanh nền trong sounds/<tên>.wav
 // tint: màu lớp mờ, chỉ đặt cho cảnh một chế độ (màu thô không tự đổi theo sáng/tối)
 // veil: độ đậm lớp mờ sau chữ, đo theo độ sáng của cảnh (cảnh càng sáng càng cần đậm)
 // hue/sat: tông xám của giao diện; accent: màu nhấn; only: cảnh chỉ hợp một chế độ
 export const THEMES = [
-  { id: 'ho-nui', sound: 'wind', veil: 0.5, title: 'Hồ núi tuyết', hue: 210, sat: 30, accent: '#2f7fd6', draw: hoNui },
-  { id: 'hoang-hon-bien', sound: 'waves', tint: '#3a1c4a', veil: 0.65, title: 'Hoàng hôn trên biển', hue: 280, sat: 30, accent: '#e8703a', only: 'dark', draw: hoangHonBien },
-  { id: 'rung-suong', sound: 'wind', veil: 0.65, title: 'Rừng thông sương sớm', hue: 150, sat: 22, accent: '#2f8a66', draw: rungSuong },
-  { id: 'sa-mac', sound: 'wind', veil: 0.6, title: 'Sa mạc chiều tà', hue: 20, sat: 28, accent: '#d6703a', draw: saMac },
-  { id: 'cuc-quang', sound: 'wind', tint: '#0c2a3a', veil: 0.7, title: 'Cực quang', hue: 220, sat: 45, accent: '#2fc48a', only: 'dark', draw: cucQuang },
-  { id: 'hoa-anh-dao', sound: 'waves', veil: 0.5, title: 'Hồ hoa anh đào', hue: 335, sat: 30, accent: '#d6457f', draw: hoaAnhDao },
-  { id: 'pho-bien', sound: 'waves', veil: 0.5, title: 'Thành phố biển', hue: 215, sat: 38, accent: '#2f7fd6', draw: phoBien },
-  { id: 'pho-dem', sound: 'night', tint: '#101c48', veil: 0.35, title: 'Phố đêm', hue: 228, sat: 45, accent: '#e0a82e', only: 'dark', draw: phoDem },
-  { id: 'neon', sound: 'rain', tint: '#3a0f5a', veil: 0.35, title: 'Phố neon mưa', hue: 275, sat: 50, accent: '#d63fc0', only: 'dark', draw: neon },
-  { id: 'pho-hoang-hon', sound: 'waves', tint: '#4a1c3c', veil: 0.45, title: 'Phố lúc hoàng hôn', hue: 300, sat: 32, accent: '#e8703a', only: 'dark', draw: phoHoangHon },
-  { id: 'pho-tuyet', sound: 'wind', tint: '#262c62', veil: 0.75, title: 'Phố tuyết', hue: 235, sat: 32, accent: '#6f7fe0', only: 'dark', draw: phoTuyet },
-  { id: 'cau-cang', sound: 'waves', veil: 0.5, title: 'Cầu cảng bình minh', hue: 240, sat: 26, accent: '#5a6fd0', draw: cauCang },
-  { id: 'tre-dem', sound: 'night', tint: '#0a2a2a', veil: 0.35, title: 'Rặng tre đêm đèn lồng', hue: 170, sat: 20, accent: '#e8703a', only: 'dark', draw: treDem },
-  { id: 'hem-pho', sound: 'night', tint: '#2a1650', veil: 0.5, title: 'Hẻm phố lên đèn', hue: 270, sat: 40, accent: '#d63fc0', only: 'dark', draw: hemPho },
-  { id: 'thac-doi', sound: 'waterfall', veil: 0.5, title: 'Thác đôi', hue: 200, sat: 30, accent: '#2f8fb8', draw: thacDoi },
-  { id: 'la-thu', sound: 'wind', veil: 0.5, title: 'Lá thu', hue: 30, sat: 30, accent: '#d6602a', draw: laThu },
+  { id: 'ho-nui', veil: 0.5, title: 'Hồ núi tuyết', hue: 210, sat: 30, accent: '#2f7fd6', draw: hoNui },
+  { id: 'hoang-hon-bien', tint: '#3a1c4a', veil: 0.65, title: 'Hoàng hôn trên biển', hue: 280, sat: 30, accent: '#e8703a', only: 'dark', draw: hoangHonBien },
+  { id: 'rung-suong', veil: 0.65, title: 'Rừng thông sương sớm', hue: 150, sat: 22, accent: '#2f8a66', draw: rungSuong },
+  { id: 'sa-mac', veil: 0.6, title: 'Sa mạc chiều tà', hue: 20, sat: 28, accent: '#d6703a', draw: saMac },
+  { id: 'cuc-quang', tint: '#0c2a3a', veil: 0.7, title: 'Cực quang', hue: 220, sat: 45, accent: '#2fc48a', only: 'dark', draw: cucQuang },
+  { id: 'hoa-anh-dao', veil: 0.5, title: 'Hồ hoa anh đào', hue: 335, sat: 30, accent: '#d6457f', draw: hoaAnhDao },
+  { id: 'pho-bien', veil: 0.5, title: 'Thành phố biển', hue: 215, sat: 38, accent: '#2f7fd6', draw: phoBien },
+  { id: 'pho-dem', tint: '#101c48', veil: 0.35, title: 'Phố đêm', hue: 228, sat: 45, accent: '#e0a82e', only: 'dark', draw: phoDem },
+  { id: 'neon', tint: '#3a0f5a', veil: 0.35, title: 'Phố neon mưa', hue: 275, sat: 50, accent: '#d63fc0', only: 'dark', draw: neon },
+  { id: 'pho-hoang-hon', tint: '#4a1c3c', veil: 0.45, title: 'Phố lúc hoàng hôn', hue: 300, sat: 32, accent: '#e8703a', only: 'dark', draw: phoHoangHon },
+  { id: 'pho-tuyet', tint: '#262c62', veil: 0.75, title: 'Phố tuyết', hue: 235, sat: 32, accent: '#6f7fe0', only: 'dark', draw: phoTuyet },
+  { id: 'cau-cang', veil: 0.5, title: 'Cầu cảng bình minh', hue: 240, sat: 26, accent: '#5a6fd0', draw: cauCang },
+  { id: 'tre-dem', tint: '#0a2a2a', veil: 0.35, title: 'Rặng tre đêm đèn lồng', hue: 170, sat: 20, accent: '#e8703a', only: 'dark', draw: treDem },
+  { id: 'hem-pho', tint: '#2a1650', veil: 0.5, title: 'Hẻm phố lên đèn', hue: 270, sat: 40, accent: '#d63fc0', only: 'dark', draw: hemPho },
+  { id: 'thac-doi', veil: 0.5, title: 'Thác đôi', hue: 200, sat: 30, accent: '#2f8fb8', draw: thacDoi },
+  { id: 'la-thu', veil: 0.5, title: 'Lá thu', hue: 30, sat: 30, accent: '#d6602a', draw: laThu },
 ]
 
 const hex = (h, s, l) => {
