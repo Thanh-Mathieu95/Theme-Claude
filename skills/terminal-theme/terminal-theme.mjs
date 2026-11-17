@@ -153,6 +153,9 @@ const writeSettings = (path, raw, json) => {
 
 // ── commands ──────────────────────────────────────────────────────────────
 const settingsFlag = flag('--settings')
+// --if-installed: change nothing unless the profile is already there (used by /scene in a terminal)
+const ifInstalled = args.includes('--if-installed')
+if (ifInstalled) args.splice(args.indexOf('--if-installed'), 1)
 const opacityFlag = flag('--opacity')
 const exportTo = flag('--export')
 
@@ -192,6 +195,10 @@ if (args.includes('--remove')) {
   process.exit(0)
 }
 
+if (ifInstalled && !json.profiles.list.some(p => p.guid === PROFILE_GUID)) {
+  console.log(`"${PROFILE_NAME}" is not in Windows Terminal; nothing changed.`)
+  process.exit(0)
+}
 const t = findScene(args[0]) ?? fail(`No scene "${args[0]}". Run with --list.`)
 const opacity = opacityFlag === undefined ? 0.3 : Number(opacityFlag)
 if (!(opacity >= 0 && opacity <= 1)) fail('--opacity must be a number from 0 to 1.')

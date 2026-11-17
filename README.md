@@ -80,6 +80,8 @@ Type these in the message box of a session:
 | `/scene neon` | Switches to a scene by its name |
 | `/scene next` | Switches to the next scene in the list |
 
+In a terminal, `/scene` also switches the Windows Terminal background once the [terminal profile](#windows-terminal-skill) is set up.
+
 The command's replies are written in Vietnamese; the scene names below are the ones you type.
 
 ## The 16 scenes
@@ -146,7 +148,9 @@ Claude lists the scenes if you don't name one, tells you what will change, and r
 - Backs up `settings.json` to `settings.json.bak-pixel-scenes` before its first change.
 - Windows Terminal reloads its settings by itself, so an open tab on that profile changes at once.
 
-The terminal image is still: animation is a desktop-app feature. `/scene` does not change the terminal's image — ask Claude for another scene instead.
+The terminal image is still: animation is a desktop-app feature.
+
+**Switching scenes in the terminal.** Once the profile exists, typing `/scene <name or number>` inside a Claude Code session in the terminal switches the Windows Terminal background as well, and the open tab changes at once. Before the profile exists, `/scene` in the terminal changes nothing there and tells you to ask Claude to set it up first.
 
 ### Run the script yourself
 
