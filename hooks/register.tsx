@@ -16,7 +16,8 @@ const find = (key: string) => THEMES.find((t, i) => t.id === key || String(i + 1
 // Khi lớp kính mỏng hơn mức cảnh cần, phủ một dải tối dịu sau cột chat (giữa màn hình),
 // hai mép vẫn rõ. Cảnh dùng được cả hai chế độ thì dải đổi sang màu sáng ở chế độ sáng.
 const scrimOf = (t: SceneTheme, glass: number) => {
-  const strength = glass >= t.veil ? 0 : Math.min(0.9, t.veil - glass + 0.35)
+  // Never darker than the scene's own glass would be: at most 80% of the gap, capped at 0.5
+  const strength = glass >= t.veil ? 0 : Math.min(0.5, (t.veil - glass) * 0.8)
 
   if (strength === 0) {
     return ''
@@ -25,7 +26,7 @@ const scrimOf = (t: SceneTheme, glass: number) => {
   const dark = t.tint ?? p.dark?.gray?.anchors?.['surface-0'] ?? '#000000'
   const light = p.light?.gray?.anchors?.['surface-0']
   const stops = (id: string, c: string) =>
-    `<linearGradient id="${id}" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="${c}" stop-opacity="0"/><stop offset=".2" stop-color="${c}" stop-opacity="${strength}"/><stop offset=".8" stop-color="${c}" stop-opacity="${strength}"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></linearGradient>`
+    `<linearGradient id="${id}" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="${c}" stop-opacity="0"/><stop offset=".25" stop-color="${c}" stop-opacity="${strength}"/><stop offset=".75" stop-color="${c}" stop-opacity="${strength}"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></linearGradient>`
   const lightRule = light === undefined ? '' : '@media (prefers-color-scheme:light){.scrim{fill:url(#scrim-l)}}'
 
   return `<defs>${stops('scrim-d', dark)}${light === undefined ? '' : stops('scrim-l', light)}</defs><style>.scrim{fill:url(#scrim-d)}${lightRule}</style><rect class="scrim" x="0" y="0" width="320" height="180"/>`
