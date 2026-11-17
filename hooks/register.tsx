@@ -79,8 +79,13 @@ const switchTerminal = async ($: EngineInterface, t: SceneTheme) => {
       return `\nKhông đổi được nền Windows Terminal: ${stderr.trim() || stdout.trim()}`
     }
 
-    return stdout.includes('not in Windows Terminal')
-      ? '\nTerminal chưa có profile Claude - Pixel Scenes: hãy nhờ Claude "đặt cảnh này làm nền Windows Terminal".'
+    if (stdout.includes('not in Windows Terminal')) {
+      return '\nTerminal chưa có profile Claude - Pixel Scenes: hãy nhờ Claude "đặt cảnh này làm nền Windows Terminal".'
+    }
+
+    return stdout.includes('tab: other')
+      ? '\nĐã đổi nền profile Claude - Pixel Scenes, nhưng tab này là profile khác nên không thấy thay đổi.' +
+          '\nMở đúng tab: bấm ▾ cạnh dấu + trên thanh tab, chọn Claude - Pixel Scenes.'
       : '\nĐã đổi luôn nền Windows Terminal (profile Claude - Pixel Scenes).'
   } catch (err) {
     return `\nKhông đổi được nền Windows Terminal: ${String(err)}`
@@ -93,11 +98,8 @@ export const register: Register = on => {
       name: 'scene',
       description: 'Đổi cảnh nền pixel: /scene <số hoặc tên>, /scene next, /scene để xem danh sách',
     })
-    const set = await $.theme.set(look(await current($), await glassOf($)))
-
-    if (!set.isDrawn) {
-      $.ui.status(set.reason)
-    }
+    // In a terminal nothing draws the theme; that is expected, so no status line about it.
+    await $.theme.set(look(await current($), await glassOf($)))
 
     return next(e)
   })

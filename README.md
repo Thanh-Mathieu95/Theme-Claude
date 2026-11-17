@@ -154,7 +154,7 @@ Claude lists the scenes if you don't name one, tells you what will change, and r
 
 The terminal image is still: animation is a desktop-app feature.
 
-**Switching scenes in the terminal.** Once the profile exists, typing `/scene <name or number>` inside a Claude Code session in the terminal switches the Windows Terminal background as well, and the open tab changes at once. Before the profile exists, `/scene` in the terminal changes nothing there and tells you to ask Claude to set it up first.
+**Switching scenes in the terminal.** Once the profile exists, typing `/scene <name or number>` inside a Claude Code session in the terminal switches the Windows Terminal background as well, and the open tab changes at once. Before the profile exists, `/scene` in the terminal changes nothing there and tells you to ask Claude to set it up first. If you type `/scene` in a tab that uses another profile, it says so and tells you how to open the **Claude - Pixel Scenes** tab.
 
 ### Run the script yourself
 

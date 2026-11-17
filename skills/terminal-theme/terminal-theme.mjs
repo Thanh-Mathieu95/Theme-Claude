@@ -241,3 +241,6 @@ const backup = writeSettings(settings, raw, json)
 console.log(`${existing ? 'Updated' : 'Added'} "${PROFILE_NAME}" with scene ${t.id} (${t.title}).`)
 console.log(`Image: ${image}`)
 console.log(`Backup of the original settings: ${backup}`)
+// Windows Terminal tells each tab's processes which profile they run in.
+const tab = process.env.WT_PROFILE_ID
+if (tab !== undefined) console.log(`tab: ${tab.toLowerCase() === PROFILE_GUID.toLowerCase() ? 'same' : 'other'}`)
