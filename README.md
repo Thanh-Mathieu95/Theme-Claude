@@ -13,12 +13,12 @@
 </p>
 
 <p align="center">
-  <a href="#-quick-start">Quick start</a> ·
-  <a href="#-use-it-in-the-desktop-app">Desktop app</a> ·
-  <a href="#-use-it-in-windows-terminal">Windows Terminal</a> ·
-  <a href="#-the-16-scenes">Scenes</a> ·
-  <a href="#-install-from-a-clone">Install from a clone</a> ·
-  <a href="#-troubleshooting">Troubleshooting</a>
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#use-it-in-the-desktop-app">Desktop app</a> ·
+  <a href="#use-it-in-windows-terminal">Windows Terminal</a> ·
+  <a href="#the-16-scenes">Scenes</a> ·
+  <a href="#install-from-a-clone">Install from a clone</a> ·
+  <a href="#troubleshooting">Troubleshooting</a>
 </p>
 
 <p align="center"><img src="docs/landscapes.png" alt="The six landscape scenes" width="100%"></p>
@@ -27,21 +27,21 @@ Every scene is drawn in code, pixel by pixel, and comes with its own color palet
 
 ---
 
-## ✨ What you get
+## What you get
 
 | | |
 | --- | --- |
-| 🎨 **16 scenes** | 6 landscapes, 6 cities and 4 side-framed scenes whose artwork stays at the edges |
-| 🌧️ **Real animation** | drifting clouds, rain, snow, falling petals and leaves, neon signs, aurora, twinkling windows — CSS inside SVG, no scripts |
-| 🖋️ **Text colors per scene** | in dark mode each scene has its own text: neon pink for `neon`, lantern amber for `tre-dem`, aurora green for `cuc-quang` |
-| 🪟 **Adjustable glass** | `/scene glass 0` makes the panel behind the chat fully transparent; the scene then dims softly behind the text only |
-| 💻 **Windows Terminal** | the same scenes and text colors as a terminal background, switched with the same `/scene` command |
-| 💾 **Remembers your choice** | the scene and glass setting carry over to every new session |
-| 🪶 **Small** | one hooks module and one script, no dependencies, no network access |
+| **16 scenes** | 6 landscapes, 6 cities and 4 side-framed scenes whose artwork stays at the edges |
+| **Real animation** | drifting clouds, rain, snow, falling petals and leaves, neon signs, aurora, twinkling windows — CSS inside SVG, no scripts |
+| **Text colors per scene** | in dark mode each scene has its own text: neon pink for `neon`, lantern amber for `tre-dem`, aurora green for `cuc-quang` |
+| **Adjustable glass** | `/scene glass 0` makes the panel behind the chat fully transparent; the scene then dims softly behind the text only |
+| **Windows Terminal** | the same scenes and text colors as a terminal background, switched with the same `/scene` command |
+| **Remembers your choice** | the scene and glass setting carry over to every new session |
+| **Small** | one hooks module and one script, no dependencies, no network access |
 
 ---
 
-## 🚀 Quick start
+## Quick start
 
 **1. Install** — in a terminal with [Claude Code](https://claude.com/claude-code):
 
@@ -63,11 +63,11 @@ Answer `y` to **Add marketplace?**, then press Enter to keep the **user** scope 
 /scene neon     switch by name
 ```
 
-That's it for the desktop app. For the terminal, see [Use it in Windows Terminal](#-use-it-in-windows-terminal).
+That's it for the desktop app. For the terminal, see [Use it in Windows Terminal](#use-it-in-windows-terminal).
 
 ---
 
-## 🖥️ Use it in the desktop app
+## Use it in the desktop app
 
 <p align="center"><img src="docs/cities.png" alt="The six city scenes" width="100%"></p>
 
@@ -80,7 +80,7 @@ That's it for the desktop app. For the terminal, see [Use it in Windows Terminal
 | `/scene glass 0.4` | Any strength from `0` (transparent) to `1` (solid) |
 | `/scene glass auto` | Back to each scene's own strength |
 
-The command's replies are written in Vietnamese; the scene names are the ones in [the list below](#-the-16-scenes).
+The command's replies are written in Vietnamese; the scene names are the ones in [the list below](#the-16-scenes).
 
 **Light and dark mode.** Eight scenes have palettes for both modes. The other eight (`hoang-hon-bien`, `cuc-quang`, `pho-dem`, `neon`, `pho-hoang-hon`, `pho-tuyet`, `tre-dem`, `hem-pho`) are night scenes made for dark mode and ask the app to draw dark. The per-scene text colors apply in dark mode; light mode keeps dark text, which is what stays readable on light surfaces.
 
@@ -88,7 +88,7 @@ The command's replies are written in Vietnamese; the scene names are the ones in
 
 ---
 
-## 💻 Use it in Windows Terminal
+## Use it in Windows Terminal
 
 <table>
   <tr>
@@ -107,7 +107,7 @@ A terminal cannot draw a Claude theme, so the plugin brings the look another way
 
 ### Set it up (once)
 
-**1. Install the plugin** (see [Quick start](#-quick-start)).
+**1. Install the plugin** (see [Quick start](#quick-start)).
 
 **2. Ask Claude to set up the terminal.** Run `claude` in any terminal and say:
 
@@ -155,7 +155,7 @@ The script is `skills/terminal-theme/terminal-theme.mjs` in this repository.
 
 ---
 
-## 🎨 The 16 scenes
+## The 16 scenes
 
 <p align="center"><img src="docs/framed.png" alt="The four side-framed scenes" width="100%"></p>
 
@@ -183,7 +183,7 @@ The script is `skills/terminal-theme/terminal-theme.mjs` in this repository.
 
 ---
 
-## 📦 Install from a clone
+## Install from a clone
 
 Prefer to keep a copy of the repository? Clone it and install from the folder:
 
@@ -201,7 +201,7 @@ claude plugin install pixel-scenes@theme-claude
 
 `theme-claude` is the marketplace name declared in this repository, so the plugin's full name is `pixel-scenes@theme-claude`. Choose the **user** scope when asked.
 
-Then set up the terminal as in [Use it in Windows Terminal](#-use-it-in-windows-terminal), or straight from the clone:
+Then set up the terminal as in [Use it in Windows Terminal](#use-it-in-windows-terminal), or straight from the clone:
 
 ```bash
 node Theme-Claude/skills/terminal-theme/terminal-theme.mjs neon
@@ -231,7 +231,7 @@ Restart Claude (or open a new session) to load it.
 
 ---
 
-## 🛟 Troubleshooting
+## Troubleshooting
 
 | You see | Do this |
 | --- | --- |
@@ -247,7 +247,7 @@ Restart Claude (or open a new session) to load it.
 
 ---
 
-## 🗑️ Uninstall
+## Uninstall
 
 1. If you used the terminal profile, remove it first — ask Claude "remove the pixel scene from my terminal", or run `node terminal-theme.mjs --remove`.
 2. Remove the plugin:
@@ -260,7 +260,7 @@ To restore Windows Terminal's settings exactly as before the first change, copy 
 
 ---
 
-## 🛠️ Make your own scene
+## Make your own scene
 
 All scenes live in [`hooks/scenes.js`](hooks/scenes.js), each a short function on a 320×180 pixel grid built from shared helpers (`bands`, `ridge`, `peaks`, `skyline`, `pines`, `clouds`, `twinkle`, `falling`, …). To add one, write a `scene(seed, () => { … })` function and add an entry to `THEMES`:
 
@@ -303,6 +303,6 @@ docs/                             images for this README
 
 ---
 
-## 📄 License
+## License
 
-[MIT](LICENSE) © Nguyen Duong Cong Thanh. The pixel art is original work and covered by the same license.
+[MIT](LICENSE) Nguyen Duong Cong Thanh. The pixel art is original work and covered by the same license.
