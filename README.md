@@ -33,7 +33,8 @@ The screenshots are still frames. In the app the scenes move.
 
 - **16 scenes in three groups**: 6 landscapes, 6 cities, and 4 "side-framed" scenes whose artwork sits at the left and right edges so the conversation never covers it.
 - **Real animation**: drifting clouds, sparkling water, falling snow, rain, petals and leaves, pulsing neon signs and aurora, twinkling stars and windows. All of it is CSS inside the SVG — no scripts.
-- **A color palette per scene**: the app's surfaces, text and accent color are tinted to match the scene. Ten scenes support both light and dark mode; six night scenes are dark-only.
+- **A color palette per scene**: the app's surfaces and accent color are tinted to match the scene, and in dark mode each scene has its own text colors (neon pink for `neon`, lantern amber for `tre-dem`, aurora green for `cuc-quang`, …). Ten scenes support both light and dark mode; six night scenes are dark-only.
+- **Adjustable glass**: `/scene glass 0` makes the panel behind the conversation fully transparent; the scene then darkens softly behind the chat column only, so text stays readable while the edges stay vivid.
 - **A veil tuned per scene**: the frosted panel behind the conversation has its own strength for every scene, measured from how bright that scene is. Night scenes also tint the veil with their own color.
 - **Your choice persists**: the scene is saved and restored in every new session.
 - **A Windows Terminal skill**: ask Claude to theme your terminal and it sets a Windows Terminal profile to any of the 16 scenes, with a matching color scheme. See [Windows Terminal (skill)](#windows-terminal-skill).
@@ -79,6 +80,8 @@ Type these in the message box of a session:
 | `/scene 9` | Switches to scene number 9 |
 | `/scene neon` | Switches to a scene by its name |
 | `/scene next` | Switches to the next scene in the list |
+| `/scene glass 0` | Makes the glass behind the conversation transparent (any value from 0 to 1) |
+| `/scene glass auto` | Returns the glass to each scene's own strength |
 
 In a terminal, `/scene` also switches the Windows Terminal background once the [terminal profile](#windows-terminal-skill) is set up.
 
@@ -144,6 +147,7 @@ Claude lists the scenes if you don't name one, tells you what will change, and r
 ### What it changes
 
 - Writes the scene as a 1920×1080 PNG to `%LOCALAPPDATA%\PixelScenes\`.
+- The color scheme uses the scene's own text colors, the same as in the desktop app: main text, secondary text (ANSI white) and dim text (ANSI bright black).
 - Adds or updates **one** profile (**Claude - Pixel Scenes**, fixed GUID, never duplicated) and **one** color scheme (`Pixel Scenes - <scene>`) in Windows Terminal's `settings.json`. Nothing else is touched.
 - Backs up `settings.json` to `settings.json.bak-pixel-scenes` before its first change.
 - Windows Terminal reloads its settings by itself, so an open tab on that profile changes at once.
@@ -177,6 +181,7 @@ The script refuses to rewrite a `settings.json` that has comments or trailing co
 
 ## Readability and accessibility
 
+- **Transparent glass stays readable.** When the glass is thinner than a scene needs, the scene adds a soft scrim behind the chat column (fading out toward the edges), darker for brighter scenes; scenes that support light mode use a light scrim there.
 - **Veil strength is measured, not guessed.** For each scene, the opacity of the frosted panel behind the conversation was chosen from the contrast between the theme's text colors and the brightest (or darkest) parts of the scene behind it.
 - **Reduced motion is respected.** If your operating system is set to reduce motion, every scene is drawn still.
 - **Animation is deliberately slow and small.** Clouds take 90 seconds to drift a few pixels; only the rain in `neon` is fast.
@@ -214,6 +219,7 @@ To add a scene:
    | `hue`, `sat` | Hue and saturation of the app's tinted grays |
    | `accent` | The accent color (links, buttons, code keywords) |
    | `only` | `'dark'` for a scene made for dark mode only |
+   | `text` | Optional `[main, secondary, dim]` text colors for dark mode; also used by the terminal scheme |
 
 To change the veil blur for every scene, edit `glass: { blur: 12, … }` in [`hooks/register.tsx`](hooks/register.tsx). To change the default scene, edit `DEFAULT` in the same file.
 

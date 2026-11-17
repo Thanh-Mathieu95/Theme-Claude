@@ -50,14 +50,16 @@ const hex = (h, s, l) => {
   }
   return `#${f(0)}${f(8)}${f(4)}`.toUpperCase()
 }
-// A dark scheme tinted with the scene's hue; ANSI colors stay recognizable (red is red, green is green).
+// A dark scheme tinted with the scene's hue, its text in the scene's own colors (the same ones the
+// desktop app uses): foreground = main text, white = secondary, brightBlack = dim text.
+// ANSI colors stay recognizable (red is red, green is green).
 export const schemeOf = t => {
   const h = t.hue
   const s = Math.min(70, t.sat * 1.8)
   return {
     name: SCHEME_PREFIX + t.title,
     background: hex(h, s, 10),
-    foreground: hex(h, 25, 92),
+    foreground: (t.text?.[0] ?? hex(h, 25, 92)).toUpperCase(),
     cursorColor: t.accent.toUpperCase(),
     selectionBackground: hex(h, s, 28),
     black: hex(h, s, 14),
@@ -67,8 +69,8 @@ export const schemeOf = t => {
     blue: '#6FA3FF',
     purple: '#C792FF',
     cyan: '#4FE0F0',
-    white: hex(h, 18, 82),
-    brightBlack: hex(h, 18, 50),
+    white: (t.text?.[1] ?? hex(h, 18, 82)).toUpperCase(),
+    brightBlack: (t.text?.[2] ?? hex(h, 18, 50)).toUpperCase(),
     brightRed: '#FF8AA0',
     brightGreen: '#8AF5C4',
     brightYellow: '#FFE89A',

@@ -1,6 +1,6 @@
 {
   "name": "pixel-scenes",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "16 hand-drawn animated pixel-art themes for Claude (landscapes, cities, side-framed scenes) with matching colors. Switch with /scene. Includes a skill that themes Windows Terminal with the same scenes.",
   "author": { "name": "Nguyen Duong Cong Thanh", "url": "https://github.com/Thanh-Mathieu95" },
   "license": "MIT",
